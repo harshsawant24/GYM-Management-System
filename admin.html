@@ -1,39 +1,63 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel | New Body Fitness</title>
-  <link rel="stylesheet" href="styles.css"> <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
   <nav>
     <div class="nav__logo">
       <a href="index.html"><img src="logo.png" alt="logo"></a>
     </div>
     <ul class="nav__links">
-      <li class="link"><a href="index.html">Home</a></li>
-      <li class="link"><a href="notice.html">View Notices</a></li>
+      <li class="link"><a href="notice.html">Notices</a></li>
     </ul>
     <button class="btn" onclick="logout()">Logout</button>
   </nav>
 
   <section class="section__container admin-container">
-    <h2 class="section__header">📢 Admin Notice Panel</h2>
-    <p class="section__subheader">Create, edit, and manage all announcements.</p>
+    <h2 class="section__header">📢 Admin Panel – New Body Fitness</h2>
+
+    <p class="section__subheader">
+      
+      This is a dedicated Admin Panel for managing the New Body Fitness website. 
+      It allows administrators to add, edit, and delete notices on the Notice Board. 
+      The panel provides a simple and intuitive interface where admins can:
+    </p>
+
+    <ul class="section__subheader">
+      <li>Create new notices by entering a title and description.</li>
+      <li>Edit existing notices directly in the list.</li>
+      <li>Delete notices that are no longer relevant.</li>
+      <li>View all existing notices in one place.</li>
+    </ul>
+
+    <p class="section__subheader">
+      The admin panel ensures that all updates are immediately visible to members, 
+      keeping the website content up-to-date and organized. 
+      Access to the panel is restricted to authorized users, 
+      maintaining security and control over the site content.
+    </p>
 
     <div class="notice-manager">
-      <form id="noticeForm" class="notice-form">
-        <input type="text" id="noticeTitle" placeholder="Enter Notice Title" required>
-        <textarea id="noticeDesc" placeholder="Enter Notice Description" required></textarea>
-        <button type="submit">Add Notice</button>
-      </form>
+  <form id="noticeForm" class="notice-form">
+    <input type="text" id="noticeTitle" placeholder="Enter Notice Title" required>
+    <button type="submit">Add Notice</button>
+  </form>
 
-      <div id="adminNoticeList" class="notice-list"></div>
-    </div>
+  <div id="adminNoticeList" class="notice-list"></div>
+</div>
+
   </section>
 
-  <script src="admin.js"></script> <!-- External JS -->
+  <script src="admin.js"></script>
+  <script>
+    function logout() {
+      localStorage.clear();
+      window.location.href = "auth.html";
+    }
+  </script>
 </body>
 </html>

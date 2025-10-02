@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 
 const noticeSchema = new mongoose.Schema({
-  title: String,
-  desc: String,
+  title: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
 });
 

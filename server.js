@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 
 const User = require("./User");
 const Notice = require("./Notice");
@@ -25,8 +26,8 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(__dirname));
 
-// Serve pages
-const pages = ["index","diet","admin","about","auth","notice","program","service"];
+// Serve HTML pages
+const pages = ["index","diet","admin","about","auth","notice","program","service","GymImages","packages","weightloss"];
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => res.sendFile(path.join(__dirname, `${page}.html`)));
 });
@@ -41,7 +42,8 @@ app.post("/api/register", async (req, res) => {
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ error: "Email already registered" });
 
-    const user = new User({ name, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ name, email, password: hashedPassword });
     await user.save();
 
     res.status(201).json({ message: "User registered successfully" });
@@ -58,7 +60,10 @@ app.post("/api/login", async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    if (!user || user.password !== password) return res.status(401).json({ error: "Invalid credentials" });
+    if (!user) return res.status(401).json({ error: "Invalid credentials" });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(401).json({ error: "Invalid credentials" });
 
     res.status(200).json({ message: "Login successful", name: user.name, email: user.email });
   } catch (err) {
@@ -68,53 +73,42 @@ app.post("/api/login", async (req, res) => {
 });
 
 // ----------------- NOTICES -----------------
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "admin123";
 
-function adminAuth(req, res, next) {
-  const { username, password } = req.body;
-  if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
-    return res.status(403).json({ error: "Forbidden: Admin only" });
-  }
-  next();
-}
-
-// Get all notices
+// Get all notices (public for logged-in members)
 app.get("/api/notices", async (req, res) => {
   try {
     const notices = await Notice.find().sort({ createdAt: -1 });
     res.json(notices);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Failed to fetch notices" });
   }
 });
 
-// Add notice
-app.post("/api/notices", adminAuth, async (req, res) => {
-  const { title, desc } = req.body;
+// Add notice (admin only)
+app.post("/api/notices", async (req, res) => {
+  const { title, desc, role } = req.body;
+  if (role !== "admin") return res.status(403).json({ error: "Admin only" });
   if (!title || !desc) return res.status(400).json({ error: "Title and description required" });
 
   try {
     const notice = new Notice({ title, desc });
     await notice.save();
-    res.status(201).json({ message: "Notice added" });
+    res.status(201).json({ message: "Notice added", notice });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Failed to add notice" });
   }
 });
 
-// Delete notice
-app.delete("/api/notices/:id", adminAuth, async (req, res) => {
-  const { id } = req.params;
-  try {
-    const result = await Notice.findByIdAndDelete(id);
-    if (!result) return res.status(404).json({ error: "Notice not found" });
+// Delete notice (admin only)
+app.delete("/api/notices/:id", async (req, res) => {
+  const { role } = req.body;
+  if (role !== "admin") return res.status(403).json({ error: "Admin only" });
 
+  try {
+    const result = await Notice.findByIdAndDelete(req.params.id);
+    if (!result) return res.status(404).json({ error: "Notice not found" });
     res.json({ message: "Notice deleted" });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Failed to delete notice" });
   }
 });

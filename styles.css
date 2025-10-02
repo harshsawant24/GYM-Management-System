@@ -289,22 +289,54 @@ nav {
 }
 
 /* ----------------------------------------- */
-/*               Service Page Styles          */
+/*            Gym Images Page Styles          */
 /* ----------------------------------------- */
 
-/* Modify/add styles for Service page here (if necessary) */
-/* Example: */
-
-.service__content {
+.gymimages__content {
   padding: 3rem 1rem;
   color: var(--text-light);
-  max-width: 900px;
+  max-width: 1100px;
   margin: auto;
+  text-align: center;
 }
-.service__content ul,
-.service__content li {
+
+.gymimages__content p {
   color: var(--white);
+  margin-bottom: 2rem;
 }
+
+/* Grid Layout - Always 2 images per row */
+.gymimages__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* ✅ exactly 2 columns */
+  gap: 2rem;
+}
+
+/* Image Card */
+.gym__img {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff; /* ensures white background behind image */
+  padding: 6px;    /* space for border effect */
+  box-sizing: border-box;
+}
+
+.gym__img img {
+  width: 100%;
+  height: auto; /* ✅ keeps natural aspect ratio */
+  object-fit: cover;
+  display: block;
+  border-radius: 0.5rem; /* keeps border inside rounded container */
+}
+
+.gym__img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
 /* ----------------------------------------- */
 /*               About Page Styles            */
 /* ----------------------------------------- */
@@ -329,58 +361,65 @@ nav {
 /*            Diet Routine Page Styles        */
 /* ----------------------------------------- */
 
-.diet__container {
+/* Make sure container has no background */
+.diet-page .diet__container {
   padding: 4rem 2rem;
-  background-color: #f9f9f9;
+  background: none !important;
   text-align: center;
 }
 
-.diet__container .section__header {
+/* Header */
+.diet-page .diet__container .section__header {
   font-size: 2.5rem;
   color: var(--secondary-color);
   margin-bottom: 1rem;
 }
 
-.diet__container .section__subheader {
+/* Subheader text */
+.diet-page .diet__container .section__subheader {
   font-size: 1.1rem;
-  color: #444;
+  color: #ccc; /* lighter for dark theme */
   max-width: 700px;
   margin: 0 auto 3rem auto;
 }
 
-.diet__grid {
+/* Grid Layout */
+.diet-page .diet__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
 }
 
-.diet__card {
-  background-color: #ffffff;
+/* Cards - transparent background instead of white */
+.diet-page .diet__card {
+  background-color: rgba(255, 255, 255, 0.05); /* subtle transparency */
   padding: 1.5rem;
   border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 }
 
-.diet__card:hover {
+.diet-page .diet__card:hover {
   transform: translateY(-8px);
 }
 
-.diet__card h4 {
+/* Card Titles */
+.diet-page .diet__card h4 {
   font-size: 1.3rem;
   color: var(--secondary-color);
   margin-bottom: 1rem;
 }
 
-.diet__card ul {
+/* Card Lists */
+.diet-page .diet__card ul {
   list-style: none;
   padding-left: 0;
   margin: 0;
 }
 
-.diet__card ul li {
+.diet-page .diet__card ul li {
   font-size: 1rem;
-  color: #333;
+  color: #eee; /* light text for black background */
   margin-bottom: 0.5rem;
 }
 
@@ -601,25 +640,23 @@ nav {
 /* ----------------------------------------- */
 /*      Login/Register (Auth) Page Styles    */
 /* ----------------------------------------- */
-
 .auth-page {
   display: flex;
   justify-content: center;
-  align-items: flex-start;   /* 👈 keeps it higher instead of dead center */
-  padding: 3rem 1rem;        /* reduced top padding */
+  align-items: flex-start;
+  padding: 3rem 1rem;
   min-height: 100vh;
   background: var(--primary-color-light);
-  color: var(--white);
 }
 
-.container {
-  width: 520px;              /* 👈 Mid-size width */
-  max-width: 90%;            /* Responsive for small screens */
+.auth-page .container {
+  width: 520px;
+  max-width: 90%;
   background: var(--primary-color);
-  padding: 40px 35px;        /* a bit more breathing room */
+  padding: 40px 35px;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-  margin-top: 40px;          /* 👈 adds gap from top */
+  margin-top: 40px;
 }
 
 .tabs {
@@ -667,27 +704,33 @@ input {
   outline: none;
 }
 
+input::placeholder {
+  color: #ccc;
+}
+
 input:focus {
   border-color: var(--secondary-color);
 }
 
-button {
+/* 🔹 Fix: Auth Buttons Visibility */
+.auth-page .container button {
   margin-top: 20px;
   padding: 12px;
-  background: var(--secondary-color);
-  border: none;
-  color: var(--primary-color);
-  font-size: 16px;
+  background-color: var(--secondary-color);
+  color: var(--white) !important; /* ✅ force white text */
   font-weight: bold;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
 }
 
-button:hover {
-  background: var(--secondary-color-dark);
+.auth-page .container button:hover {
+  background-color: var(--secondary-color-dark);
+  color: var(--white) !important; /* ✅ ensure hover text is visible */
 }
 
+/* Links below forms */
 .small-text {
   text-align: center;
   margin-top: 10px;
@@ -699,6 +742,7 @@ button:hover {
   color: var(--secondary-color);
   text-decoration: none;
 }
+
 /* ----------------------------------------- */
 /*      Admin Page     */
 /* ----------------------------------------- */
@@ -717,8 +761,7 @@ button:hover {
   text-align: center;
 }
 
-.notice-form input,
-.notice-form textarea {
+.notice-form input {
   width: 100%;
   padding: 0.8rem;
   margin: 0.5rem 0;
@@ -772,6 +815,43 @@ button:hover {
   cursor: pointer;
   font-size: 1rem;
 }
+
+/* ----------------------------------------- */
+/*   Admin Panel Description Styling         */
+/* ----------------------------------------- */
+
+.section__subheader {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+  color: #f5f5f5; /* softer white for readability */
+}
+
+.section__subheader p {
+  margin-bottom: 1rem;
+}
+
+.section__subheader ul {
+  margin: 1rem 0 1.5rem 1.5rem;
+  list-style: none; /* remove default bullets */
+  padding: 0;
+}
+
+.section__subheader li {
+  margin-bottom: 0.6rem;
+  padding-left: 1.8rem;
+  position: relative;
+}
+
+/* Custom bullet icons (✅) */
+.section__subheader li::before {
+  content: "✅";
+  position: absolute;
+  left: 0;
+  color: #00ffcc;
+  font-size: 1.1rem;
+}
+
 /* ----------------------------------------- */
 /*          Weight Loss Table Styles         */
 /* ----------------------------------------- */
@@ -815,3 +895,43 @@ button:hover {
   background-color: rgba(255, 255, 255, 0.15);
   cursor: pointer;
 } */
+/* ----------------------------------------- */
+/*   Packages Page - Force White Text Colors */
+/* ----------------------------------------- */
+
+.packages-page {
+  color: var(--white);
+}
+
+.packages-page a {
+  color: var(--white);
+}
+
+.packages-page a:hover {
+  color: var(--secondary-color); /* nice hover effect */
+}
+
+.packages-page .weightloss__table th,
+.packages-page .weightloss__table td {
+  color: var(--white);
+}
+/* ----------------------------------------- */
+/*   Weight Loss Page - Force White Text     */
+/* ----------------------------------------- */
+
+.weightloss-page {
+  color: var(--white);
+}
+
+.weightloss-page a {
+  color: var(--white);
+}
+
+.weightloss-page a:hover {
+  color: var(--secondary-color);
+}
+
+.weightloss-page .weightloss__table th,
+.weightloss-page .weightloss__table td {
+  color: var(--white);
+}

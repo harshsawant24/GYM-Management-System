@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
-const uri = process.env.MONGO_URI;
+
 const User = require("./User");
 const Notice = require("./Notice");
 
@@ -11,7 +11,7 @@ const app = express();
 const PORT = 5000;
 
 // MongoDB Atlas URI
-const uri = "mongodb+srv://harshsawant24:UGr4ak5JpEYmWuDv@cluster0.nzvlqpi.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const uri = "mongodb+srv://harshsawant24:UGr4ak5JpEYmWuDv@cluster0.nzvlqpi.mongodb.net/gym?retryWrites=true&w=majority";
 
 // Connect to MongoDB Atlas
 mongoose.connect(uri)

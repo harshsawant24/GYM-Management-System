@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
-
+const uri = process.env.MONGO_URI;
 const User = require("./User");
 const Notice = require("./Notice");
 

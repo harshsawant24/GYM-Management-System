@@ -120,9 +120,9 @@ nav {
   transition: 0.3s;
 }
 
-/* .link a:hover::after {
+.link a:hover::after {
   width: 50%;
-} */
+} 
 
 
 /* ----------------------------------------- */
@@ -152,10 +152,10 @@ nav {
   z-index: -1;
 } */
 
-/* .header__blur {
+ .header__blur {
   bottom: 5rem;
   right: 0;
-} */
+} 
 
 .header__content h4 {
   margin-bottom: 1rem;
@@ -186,7 +186,7 @@ nav {
   position: relative;
 }
 
-/* .header__image::before {
+ .header__image::before {
   content: "o";
   position: absolute;
   top: 0;
@@ -198,7 +198,7 @@ nav {
   color: var(--secondary-color);
   opacity: 0.1;
   z-index: -1;
-} */
+} 
 
 .header__image img {
   max-width: 350px;
@@ -252,10 +252,10 @@ nav {
   transition: 0.3s;
 }
 
-/* .explore__card:hover {
+ .explore__card:hover {
   background-color: var(--primary-color-extra-light);
   border-color: var(--secondary-color);
-} */
+} 
 
 .explore__card span {
   display: inline-block;
@@ -434,10 +434,10 @@ nav {
   gap: 2rem;
 }
 
-/* .footer__blur {
+ .footer__blur {
   bottom: 0;
   right: 0;
-} */
+} 
 
 .footer__logo {
   max-width: 150px;
@@ -464,10 +464,10 @@ nav {
   transition: 0.3s;
 }
 
-/* .footer__socials a:hover {
+ .footer__socials a:hover {
   color: var(--white);
   background-color: var(--secondary-color);
-} */
+} 
 
 .footer__col h4 {
   margin-bottom: 2rem;
@@ -483,9 +483,9 @@ nav {
   transition: 0.3s;
 }
 
-/* .footer__col > a:hover {
+  .footer__col > a:hover {
   color: var(--secondary-color);
-} */
+} 
 
 .footer__bar {
   max-width: var(--max-width);
@@ -616,9 +616,9 @@ nav {
   transition: transform 0.3s ease;
 }
 
-/* .diet__card:hover {
+ .diet__card:hover {
   transform: translateY(-8px);
-} */
+} 
 
 .diet__card h4 {
   font-size: 1.3rem;
@@ -891,10 +891,10 @@ input:focus {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* .weightloss__table tbody tr:hover {
+ .weightloss__table tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.15);
   cursor: pointer;
-} */
+} 
 /* ----------------------------------------- */
 /*   Packages Page - Force White Text Colors */
 /* ----------------------------------------- */
